@@ -74,7 +74,7 @@ public class CharacterSprite extends Parent {
             //首次执行的时候的延时
             long delay = 0;
             //每次执行的时候的时延
-            long intevalPeriod = 30;
+            long intevalPeriod = 60;
             // schedules the task to be run in an interval
             timer.scheduleAtFixedRate(timerTask, delay,
                     intevalPeriod);
@@ -122,6 +122,7 @@ public class CharacterSprite extends Parent {
         x = x - speed;
 
         lastDirection = direction;
+
     }
 
     /**
