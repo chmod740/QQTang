@@ -1,10 +1,13 @@
 package sample;
 
+import javafx.scene.input.KeyCode;
+
 /**
  * GamePanel与地图之间的回调监听
  * @author HUPENG
  */
 public interface GameListener {
-    public void OnMyCharacterSpriteCreated(CharacterSprite characterSprite);
-    public void OnOpponentCharacterSpriteCreated(CharacterSprite characterSprite);
+    public void onMyCharacterSpriteCreated(CharacterSprite characterSprite);
+    public void onOpponentCharacterSpriteCreated(CharacterSprite characterSprite);
+    public void onMyCharacterSpriteMoved(KeyCode keyCode);
 }

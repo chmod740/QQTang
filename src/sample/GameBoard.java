@@ -33,29 +33,37 @@ public class GameBoard {
         this.gameListener = gameListener;
         this.isServer = isServer;
         if (isServer){
-            myCharacterSprite = new CharacterSprite(50,50,100,100,"img/server_actor.png");
-            opponentCharacterSprite = new CharacterSprite(400,50,100,100,"img/client_actor.png");
+            myCharacterSprite = new CharacterSprite(new MyCharacterListener(),50,50,100,100,"img/server_actor.png");
+            opponentCharacterSprite = new CharacterSprite(null,400,50,100,100,"img/client_actor.png");
         }else{
-            opponentCharacterSprite = new CharacterSprite(50,50,100,100,"img/server_actor.png");
-            myCharacterSprite = new CharacterSprite(400,50,100,100,"img/client_actor.png");
+            opponentCharacterSprite = new CharacterSprite(null,50,50,100,100,"img/server_actor.png");
+            myCharacterSprite = new CharacterSprite(new MyCharacterListener(),400,50,100,100,"img/client_actor.png");
         }
-        gameListener.OnMyCharacterSpriteCreated(myCharacterSprite);
-        gameListener.OnOpponentCharacterSpriteCreated(opponentCharacterSprite);
+        gameListener.onMyCharacterSpriteCreated(myCharacterSprite);
+        gameListener.onOpponentCharacterSpriteCreated(opponentCharacterSprite);
     }
 
     public void addLocalKeyCode(KeyCode keyCode){
         myCharacterSprite.addKeyCode(keyCode);
     }
 
-    public void addRemoteKeyCode(KeyCode keyCode) {
-        opponentCharacterSprite.addKeyCode(keyCode);
-    }
-    public void removeLocalKeyCode(KeyCode keyCode){
-        myCharacterSprite.removeKeyCode(keyCode);
+    /**
+     * 移动对手的精灵
+     * */
+    public void moveOpponentCharacterSprite(KeyCode keyCode){
+        if(keyCode == KeyCode.LEFT){
+            opponentCharacterSprite.moveLeft();
+        }else if(keyCode == KeyCode.RIGHT){
+            opponentCharacterSprite.moveRight();
+        }else if(keyCode == KeyCode.UP){
+            opponentCharacterSprite.moveUp();
+        }else if(keyCode == KeyCode.DOWN){
+            opponentCharacterSprite.moveDown();
+        }
     }
 
-    public void removeRemoteKeyCode(KeyCode keyCode){
-        opponentCharacterSprite.removeKeyCode(keyCode);
+    public void removeLocalKeyCode(KeyCode keyCode){
+        myCharacterSprite.removeKeyCode(keyCode);
     }
 
     /**
@@ -65,5 +73,14 @@ public class GameBoard {
         myCharacterSprite.cancelTimerTask();
     }
 
+    /**
+     * 我的人物精灵的走动的回调的监听器
+     * */
+    class MyCharacterListener implements CharacterListener{
 
+        @Override
+        public void move(KeyCode keyCode) {
+            gameListener.onMyCharacterSpriteMoved(keyCode);
+        }
+    }
 }

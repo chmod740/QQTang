@@ -30,15 +30,16 @@ public class CharacterSprite extends Parent {
     private TimerTask timerTask = null;
     private Timer timer;
 
-
     private List<KeyCode> directions = new ArrayList<>();
 
+    private CharacterListener characterListener;
 
-    public CharacterSprite(int x, int y, int width, int height, String url) {
+    public CharacterSprite(CharacterListener characterListener,int x, int y, int width, int height, String url) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.characterListener = characterListener;
         Image actor = new Image(getClass().getResourceAsStream(url));
         mImageView = new ImageView(actor);
         mImageView.setViewport(new Rectangle2D(0, 0, width, height));
@@ -46,36 +47,39 @@ public class CharacterSprite extends Parent {
         mImageView.setLayoutY(y);
         getChildren().add(mImageView);
 
-
-        //增加Timer
-        timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                int size = directions.size();
-                if (size>0){
-                    KeyCode keyCode = directions.get(size-1);
-                    if(keyCode == KeyCode.LEFT){
-                        moveLeft();
-                    }else if(keyCode == KeyCode.RIGHT){
-                        moveRight();
-                    }else if(keyCode == KeyCode.UP){
-                        moveUp();
-                    }else if(keyCode == KeyCode.DOWN){
-                        moveDown();
+        if (characterListener!=null){
+            //增加Timer
+            timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    int size = directions.size();
+                    if (size>0){
+                        KeyCode keyCode = directions.get(size-1);
+                        if(keyCode == KeyCode.LEFT){
+                            moveLeft();
+                        }else if(keyCode == KeyCode.RIGHT){
+                            moveRight();
+                        }else if(keyCode == KeyCode.UP){
+                            moveUp();
+                        }else if(keyCode == KeyCode.DOWN){
+                            moveDown();
+                        }
+                        characterListener.move(keyCode);
+                    }else {
+                        stop();
                     }
-                }else {
-                    stop();
                 }
-            }
-        };
-        timer = new Timer();
-        //首次执行的时候的延时
-        long delay = 0;
-        //每次执行的时候的时延
-        long intevalPeriod = 30;
-        // schedules the task to be run in an interval
-        timer.scheduleAtFixedRate(timerTask, delay,
-                intevalPeriod);
+            };
+            timer = new Timer();
+            //首次执行的时候的延时
+            long delay = 0;
+            //每次执行的时候的时延
+            long intevalPeriod = 30;
+            // schedules the task to be run in an interval
+            timer.scheduleAtFixedRate(timerTask, delay,
+                    intevalPeriod);
+        }
+
     }
 
     /**

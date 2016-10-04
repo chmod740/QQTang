@@ -31,19 +31,19 @@ public class Tool {
      * */
     public static KeyCode getKeyCodeFromMode(int mode){
         switch (mode){
-            case 1:case 5:
+            case 1:
                 return KeyCode.UP;
-            case 2:case 6:
+            case 2:
                 return KeyCode.DOWN;
-            case 3:case 7:
+            case 3:
                 return KeyCode.LEFT;
-            case 4:case 8:
+            case 4:
                 return KeyCode.RIGHT;
         }
         return KeyCode.SPACE;
     }
 
-    public static int getModeFromKeyCode(KeyCode keyCode,boolean pressed){
+    public static int getModeFromKeyCode(KeyCode keyCode){
         int temp = 0;
         if (keyCode == KeyCode.UP){
             temp = 1;
@@ -56,9 +56,6 @@ public class Tool {
         }
         if (keyCode == KeyCode.RIGHT){
             temp = 4;
-        }
-        if (!pressed){
-            temp = temp + 4;
         }
         return temp;
     }

@@ -99,13 +99,7 @@ public class GamePanel extends Parent {
                 }catch (Exception e){
 
                 }
-                try {
-                    MyData myData = new MyData();
-                    myData.mode = Tool.getModeFromKeyCode(event.getCode(),true);
-                    minaUtil.send(myData);
-                }catch (Exception e){
 
-                }
             }
         });
         getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -116,13 +110,7 @@ public class GamePanel extends Parent {
                 }catch (Exception e){
 
                 }
-                try {
-                    MyData myData = new MyData();
-                    myData.mode = Tool.getModeFromKeyCode(event.getCode(),false);
-                    minaUtil.send(myData);
-                }catch (Exception e){
 
-                }
             }
         });
     }
@@ -195,13 +183,20 @@ public class GamePanel extends Parent {
      * */
     class MyGameListener implements GameListener {
         @Override
-        public void OnMyCharacterSpriteCreated(CharacterSprite characterSprite) {
+        public void onMyCharacterSpriteCreated(CharacterSprite characterSprite) {
             getChildren().add(characterSprite);
         }
 
         @Override
-        public void OnOpponentCharacterSpriteCreated(CharacterSprite characterSprite) {
+        public void onOpponentCharacterSpriteCreated(CharacterSprite characterSprite) {
             getChildren().add(characterSprite);
+        }
+
+        @Override
+        public void onMyCharacterSpriteMoved(KeyCode keyCode) {
+            MyData myData = new MyData();
+            myData.mode = Tool.getModeFromKeyCode(keyCode);
+            minaUtil.send(myData);
         }
     }
 
@@ -220,11 +215,7 @@ public class GamePanel extends Parent {
                         try {
                             MyData myData = (MyData)obj;
                             KeyCode keyCode = Tool.getKeyCodeFromMode(myData.mode);
-                            if (myData.mode <= 4){
-                                gameBoard.addRemoteKeyCode(keyCode);
-                            }else{
-                                gameBoard.removeRemoteKeyCode(keyCode);
-                            }
+                            gameBoard.moveOpponentCharacterSprite(keyCode);
                         }catch (Exception e){
 
                         }
