@@ -240,7 +240,7 @@ public class GamePanel extends Parent {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-//                    gameBoard = new GameBoard(myGameListener, isServer);
+                    gameBoard = new GameBoard(myGameListener, isServer);
 //                    JOptionPane.showMessageDialog(null,
 //                            msg ,"游戏提示", JOptionPane.INFORMATION_MESSAGE);
                 }
