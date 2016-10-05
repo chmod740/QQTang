@@ -25,7 +25,7 @@ public class CharacterSprite extends Parent {
     private int index = 0;
     private int indexDiv = 5;
     private ImageView mImageView;
-    private int speed = 10;
+    private int speed = 5;
 
     //定时器
     private TimerTask timerTask = null;
@@ -34,6 +34,10 @@ public class CharacterSprite extends Parent {
     private List<KeyCode> directions = new ArrayList<>();
 
     private CharacterListener characterListener;
+
+    private int xLength = 41;
+    private int yLength = 42;
+
 
     public CharacterSprite(CharacterListener characterListener,int x, int y, int width, int height, String url) {
         this.x = x;
@@ -69,7 +73,7 @@ public class CharacterSprite extends Parent {
                                 }else if(keyCode == KeyCode.DOWN){
                                     moveDown();
                                 }
-                                characterListener.move(keyCode);
+                                characterListener.onMoved(keyCode);
                             }else {
                                 stop();
                             }
@@ -223,18 +227,6 @@ public class CharacterSprite extends Parent {
     }
     public void setY(int y) {
         this.y = y;
-    }
-    public int getWidth() {
-        return width;
-    }
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    public int getHeight() {
-        return height;
-    }
-    public void setHeight(int height) {
-        this.height = height;
     }
 
 

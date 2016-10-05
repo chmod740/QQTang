@@ -29,6 +29,9 @@ public class GameBoard {
      * */
     private CharacterSprite opponentCharacterSprite;
 
+    /**
+     * 炸弹精灵
+     * */
 
     public GameBoard(GameListener gameListener, boolean isServer){
         this.gameListener = gameListener;
@@ -65,10 +68,8 @@ public class GameBoard {
                 }else if(keyCode == KeyCode.DOWN){
                     opponentCharacterSprite.moveDown();
                 }
-
             }
         });
-
     }
 
     public void removeLocalKeyCode(KeyCode keyCode){
@@ -82,8 +83,18 @@ public class GameBoard {
     class MyCharacterListener implements CharacterListener{
 
         @Override
-        public void move(KeyCode keyCode) {
+        public void onMoveRequest(int x, int y) {
+
+        }
+
+        @Override
+        public void onMoved(KeyCode keyCode) {
             gameListener.onMyCharacterSpriteMoved(keyCode);
+        }
+
+        @Override
+        public void onBombRequest(int x, int y, boolean isMyCharacterSprite) {
+
         }
     }
 }

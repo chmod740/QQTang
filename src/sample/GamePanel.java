@@ -188,6 +188,11 @@ public class GamePanel extends Parent {
             myData.mode = Tool.getModeFromKeyCode(keyCode);
             minaUtil.send(myData);
         }
+
+        @Override
+        public void onBombSpriteCreated(BombSprite bombSprite) {
+            getChildren().add(bombSprite);
+        }
     }
 
 

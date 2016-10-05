@@ -17,7 +17,7 @@ public class Main extends Application {
 
         final Scene scene = new Scene(gamePanel,800, 600);
         gamePanel.initial();
-        //scene.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("img/游戏窗口.png"))));
+        scene.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("img/游戏窗口.png"))));
         stage.setScene(scene);
         stage.setTitle("JavaFX游戏开发--QQ堂--by HUPENG");
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
