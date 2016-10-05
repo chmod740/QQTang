@@ -237,17 +237,5 @@ public class CharacterSprite extends Parent {
         this.height = height;
     }
 
-    public void cancelTimerTask(){
-        try{
-            timerTask.cancel();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        try{
-            timer.cancel();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        System.exit(0);
-    }
+
 }

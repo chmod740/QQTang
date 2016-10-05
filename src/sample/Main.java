@@ -11,14 +11,6 @@ import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
-//    @Override
-//    public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStage.setTitle("Hello World");
-//        primaryStage.setScene(new Scene(root, 300, 275));
-//        primaryStage.show();
-//    }
-
     @Override
     public void start(Stage stage) throws Exception {
         GamePanel gamePanel = new GamePanel();
@@ -31,12 +23,11 @@ public class Main extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                gamePanel.stageCloseRequest();
+                System.exit(0);
             }
         });
         stage.show();
     }
-
     public static void main(String[] args) {
         launch(Main.class, args);
     }

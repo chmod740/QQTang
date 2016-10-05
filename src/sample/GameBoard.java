@@ -75,12 +75,6 @@ public class GameBoard {
         myCharacterSprite.removeKeyCode(keyCode);
     }
 
-    /**
-     * 取消精灵的定时器
-     * */
-    public void cancelCharacterSpriteTimerTask(){
-        myCharacterSprite.cancelTimerTask();
-    }
 
     /**
      * 我的人物精灵的走动的回调的监听器

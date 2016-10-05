@@ -167,16 +167,6 @@ public class GamePanel extends Parent {
                 "作者：胡鹏\n邮箱：545061225@163.com\n" ,"关于作者", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /**
-     * 窗口关闭事件
-     * */
-    public void stageCloseRequest(){
-        try {
-            gameBoard.cancelCharacterSpriteTimerTask();
-        }catch (Exception e){
-
-        }
-    }
 
     /**
      * GamePanel与Map之间的回调
