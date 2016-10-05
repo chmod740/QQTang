@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
@@ -52,29 +53,35 @@ public class CharacterSprite extends Parent {
             timerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    int size = directions.size();
-                    if (size>0){
-                        KeyCode keyCode = directions.get(size-1);
-                        if(keyCode == KeyCode.LEFT){
-                            moveLeft();
-                        }else if(keyCode == KeyCode.RIGHT){
-                            moveRight();
-                        }else if(keyCode == KeyCode.UP){
-                            moveUp();
-                        }else if(keyCode == KeyCode.DOWN){
-                            moveDown();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            //更新JavaFX的主线程的代码放在此处
+                            int size = directions.size();
+                            if (size>0){
+                                KeyCode keyCode = directions.get(size-1);
+                                if(keyCode == KeyCode.LEFT){
+                                    moveLeft();
+                                }else if(keyCode == KeyCode.RIGHT){
+                                    moveRight();
+                                }else if(keyCode == KeyCode.UP){
+                                    moveUp();
+                                }else if(keyCode == KeyCode.DOWN){
+                                    moveDown();
+                                }
+                                characterListener.move(keyCode);
+                            }else {
+                                stop();
+                            }
                         }
-                        characterListener.move(keyCode);
-                    }else {
-                        stop();
-                    }
+                    });
                 }
             };
             timer = new Timer();
             //首次执行的时候的延时
             long delay = 0;
             //每次执行的时候的时延
-            long intevalPeriod = 60;
+            long intevalPeriod = 30;
             // schedules the task to be run in an interval
             timer.scheduleAtFixedRate(timerTask, delay,
                     intevalPeriod);

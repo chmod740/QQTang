@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -51,15 +52,23 @@ public class GameBoard {
      * 移动对手的精灵
      * */
     public void moveOpponentCharacterSprite(KeyCode keyCode){
-        if(keyCode == KeyCode.LEFT){
-            opponentCharacterSprite.moveLeft();
-        }else if(keyCode == KeyCode.RIGHT){
-            opponentCharacterSprite.moveRight();
-        }else if(keyCode == KeyCode.UP){
-            opponentCharacterSprite.moveUp();
-        }else if(keyCode == KeyCode.DOWN){
-            opponentCharacterSprite.moveDown();
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                //更新JavaFX的主线程的代码放在此处
+                if(keyCode == KeyCode.LEFT){
+                    opponentCharacterSprite.moveLeft();
+                }else if(keyCode == KeyCode.RIGHT){
+                    opponentCharacterSprite.moveRight();
+                }else if(keyCode == KeyCode.UP){
+                    opponentCharacterSprite.moveUp();
+                }else if(keyCode == KeyCode.DOWN){
+                    opponentCharacterSprite.moveDown();
+                }
+
+            }
+        });
+
     }
 
     public void removeLocalKeyCode(KeyCode keyCode){
