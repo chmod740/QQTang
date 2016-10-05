@@ -107,9 +107,11 @@ public class CharacterSprite extends Parent {
         }
         mImageView.setViewport(new Rectangle2D(((index / indexDiv) % 4) * width, ((index / indexDiv) / 4) * height, width,
                 height));
-        mImageView.setLayoutY(mImageView.getLayoutY() + speed);
 
+
+        mImageView.setLayoutY(mImageView.getLayoutY() + speed);
         y = y + speed;
+
 
         lastDirection = direction;
     }
@@ -128,8 +130,9 @@ public class CharacterSprite extends Parent {
         }
         mImageView.setViewport(new Rectangle2D(((index / indexDiv) % 4) * width, ((index / indexDiv) / 4) * height, width,
                 height));
-        mImageView.setLayoutX(mImageView.getLayoutX() - speed);
 
+
+        mImageView.setLayoutX(mImageView.getLayoutX() - speed);
         x = x - speed;
 
         lastDirection = direction;
@@ -150,8 +153,9 @@ public class CharacterSprite extends Parent {
         }
         mImageView.setViewport(new Rectangle2D(((index / indexDiv) % 4) * width, ((index / indexDiv) / 4) * height, width,
                 height));
-        mImageView.setLayoutX(mImageView.getLayoutX() + speed);
 
+
+        mImageView.setLayoutX(mImageView.getLayoutX() + speed);
         x = x + speed;
 
         lastDirection = direction;
@@ -171,8 +175,9 @@ public class CharacterSprite extends Parent {
         }
         mImageView.setViewport(new Rectangle2D(((index / indexDiv) % 4) * width, ((index / indexDiv) / 4) * height, width,
                 height));
-        mImageView.setLayoutY(mImageView.getLayoutY() - speed);
 
+
+        mImageView.setLayoutY(mImageView.getLayoutY() - speed);
         y = y - speed;
 
         lastDirection = direction;
@@ -229,5 +234,11 @@ public class CharacterSprite extends Parent {
         this.y = y;
     }
 
+    public void setLayout(int x,int y){
+        this.x = x;
+        this.y = y;
+        mImageView.setLayoutX(x);
+        mImageView.setLayoutY(y);
+    }
 
 }

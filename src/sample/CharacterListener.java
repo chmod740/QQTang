@@ -12,7 +12,7 @@ public interface CharacterListener {
     public void onMoveRequest(int x,int y);
 
     /**
-     * 精灵已经一定
+     * 精灵已经移动
      * */
     public void onMoved(KeyCode keyCode);
 

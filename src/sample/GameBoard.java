@@ -32,10 +32,17 @@ public class GameBoard {
     /**
      * 炸弹精灵
      * */
+    private BombSprite bombSprite;
+
+    /**
+     * 地图管理
+     * */
+    private MapManager mapManager;
 
     public GameBoard(GameListener gameListener, boolean isServer){
         this.gameListener = gameListener;
         this.isServer = isServer;
+        this.mapManager = new MapManager();
         if (isServer){
             myCharacterSprite = new CharacterSprite(new MyCharacterListener(),50,50,100,100,"img/server_actor.png");
             opponentCharacterSprite = new CharacterSprite(null,400,50,100,100,"img/client_actor.png");
