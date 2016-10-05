@@ -34,7 +34,7 @@ public class GamePanel extends Parent {
     private MyGameListener myGameListener = null;
 
     /**
-     *
+     * 高性能Socket通信框架
      * */
     private MinaUtil minaUtil = null;
 
